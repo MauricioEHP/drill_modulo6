@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% include "menu.html" %}
+{% block content %} 
+{% if user.is_authenticated %}
+    {% if perms.vehiculo.add_vehiculo %}
+        <div class="container py-1 text-center">
+            <h3>Ingreso de Vehiculos</h3>
+         
+            <form method="POST">
+                {% csrf_token %} 
+                <div class="form-group">
+                    <label>Marca:</label>
+                    <br>
+                    {{ form.marca }}
+                </div>
+                <div class="form-group">
+                    <label>Modelo:</label>
+                    <br>
+                    {{ form.modelo }}
+                </div>
+                <div class="form-modelo">
+                    <label>Serial carroceria:</label>
+                    <br>
+                    {{ form.serial_carroceria }}
+                </div>
+                <div class="form-modelo">
+                    <label>Serial Motor:</label>
+                    <br>
+                    {{ form.serial_motor }}
+                </div>
+                <div class="form-modelo">
+                    <label>Categoria:</label>
+                    <br>
+                    {{ form.categoria }}
+                </div>
+                <div class="form-modelo">
+                    <label>Precio:</label>
+                    <br>
+                    {{ form.precio }}
+                </div>
+                <input type="submit" class="btn btn-primary"></input>
+            </form>
+
+        </div>
+    {% else %}
+        <h1 class="container py-5">Debes ser administrador para poder hacer Ingresos</h1>
+    {% endif %}
+{% else %}
+    <div class="container py-5 ">
+        <h1>Solo Si estas regitrado como administrador puedes realizar Ingresos</h1>
+    </div>
+{% endif %}
+{% endblock %}
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %} 

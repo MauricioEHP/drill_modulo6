@@ -1,0 +1,27 @@
+{% include "menu.html" %}
+{% block content %}
+    {% load crispy_forms_tags %} 
+    {% if user.is_authenticated %}
+    {% if user.is_staff or user.is_admin %}
+    <div class="container py-5">
+        <h1>Registro</h1>
+        <form method="POST">
+            {% csrf_token %} 
+            {{ register_form|crispy }}
+            <button class="btn btn-primary" type="submit">Registrar</button>
+        </form>
+        <p class="text-center">
+            
+        </p>
+    </div>
+    {% else %}
+        <h1>No tienes permiso de estar aqui.</h1>
+    {% endif %}
+    {% else %} 
+        <h1>No estas autorizado para agregar usuarios</h1>
+    {% endif %}
+{% endblock %}
+
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %} 
